@@ -3,9 +3,10 @@ import React from "react";
 import FormInput from "./../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-buttom.component";
 
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { signInWithGoogle, auth } from "../../firebase/firebase.utils";
 
 import "./sign-in.styles.scss";
+// import { auth } from "firebase";
 
 class SignIn extends React.Component {
   constructor() {
@@ -17,13 +18,18 @@ class SignIn extends React.Component {
     };
   }
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
-
-    this.setState({
-      email: "",
-      password: ""
-    });
+    const { password, email } = this.state;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({
+        email: "",
+        password: ""
+      });
+    } catch (error) {
+      console.log("There is an error", error);
+    }
   };
 
   handleChange = e => {
