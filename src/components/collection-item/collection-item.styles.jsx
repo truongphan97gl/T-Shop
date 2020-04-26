@@ -25,7 +25,7 @@ export const AddButton = styled(CustomButton)`
   top: 255px;
   display: none;
 `;
-export const BackgroundImage = styled.image`
+export const BackgroundImage = styled.img`
     width: 100%;
     height: 95%;
     background-size: cover;
